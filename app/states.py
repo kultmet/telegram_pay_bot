@@ -1,5 +1,6 @@
 from aiogram.dispatcher.filters import state
 
+
 class AmountInput(state.StatesGroup):
     amount = state.State()
 

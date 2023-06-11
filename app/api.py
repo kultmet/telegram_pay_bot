@@ -3,8 +3,7 @@ from aiohttp.client_exceptions import ClientConnectorError
 import requests
 
 from constants import API_HOST, API_PORT
-from logger import info_logger, warning_logger
-
+from logger import warning_logger
 
 
 async def get_users():
@@ -107,4 +106,3 @@ def get_blacklist_sync():
     response = requests.get(f'{API_HOST}:{API_PORT}/blacklist/')
     print(response.json())
     return response.json()
-

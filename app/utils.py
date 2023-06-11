@@ -1,8 +1,9 @@
-from logger import info_logger, warning_logger
+from logger import info_logger
 
-from aiogram import Bot, Dispatcher, executor, types
+from aiogram import types
 from config import bot
 from app.buttons import exit_button
+
 
 class MessageStack:
     """Стэк для ID Сообщений."""
@@ -33,7 +34,6 @@ async def delete_messages(message: types.Message):
             chat_id=message.chat.id, message_id=message_id
         )
     info_logger.debug('delete_messages')
-
 
 
 async def get_file(filename, message: types.Message):
