@@ -1,22 +1,44 @@
 # telegram_pay_bot
 This telegram-bot knows how to pay and administer user-unit
 
-## How to start?
 
-сбилдить образ
+|Проект состоит из ДВУХ сервисов|
+
+
+
+# How to start?
+
+
+
+## Сервис №1 - API
+клонировать telegram_pay_admin (API)
+
 
 ```
-docker build -t payment_bot .
+git clone https://github.com/kultmet/telegram_pay_admin.git
 ```
 
-запуск контейнера с ботом (НЕ РАБОТАЕТ БЕЗ API)
+<hr>
+
+запуск
 
 ```
-docker run --env TELEGRAM_TOKEN=5412219453:AAExZmPDpq998Pjan2i_-4dDyoyzOc7LJg0 --env PAYMENTS_TOKEN=401643678:TEST:10a79676-94a1-4759-badd-2060fe042310 --network=host --name payment_bot --rm -p 8080:8080 payment_bot
-```
-### Здесь используется Telegram Payments так как заказчик сказал что Qiwi сейчас багует
+cd /<путь к корневой папке проекта>
 
-Search 
+docker-compose up -d
+```
+
+## Сервис №2
+
+клонировать telegram_pay_bot
+
+
+```
+git clone https://github.com/kultmet/telegram_pay_bot.git
+```
+
+
+#### токен 
 
 Напишите на @BotFather команду /start 
 
@@ -26,12 +48,40 @@ Search
 
 TELEGRAM_TOKEN=<ваш_токен>
 
+<hr>
+
+#### Платежный токен 
+
 далее
+
 введите команту /mybots
+
 выберите вашего бота -> нажмите кнопку Payments -> следуйте инструкциям по вубору провайдера
 
 полученый токен скопируйте в переменную
+
 PAYMENTS_TOKEN=<ваш_платежный_токен>
+
+<hr>
+
+сбилдить образ
+
+```
+docker build -t payment_bot .
+```
+
+
+
+
+запуск контейнера с ботом (НЕ РАБОТАЕТ БЕЗ API)
+
+```
+docker run --env TELEGRAM_TOKEN=<ваш токен> --env PAYMENTS_TOKEN=<ваш платежный токен> --network=host --name payment_bot --rm -p 8080:8080 payment_bot
+```
+### Здесь используется Telegram Payments так как заказчик сказал что Qiwi сейчас багует
+
+
+
 
 ### тестовая карта
 
