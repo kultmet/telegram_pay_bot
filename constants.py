@@ -5,7 +5,7 @@ GREETING = '''Привет, {username}!!!
 '''
 
 API_HOST = 'http://127.0.0.1'
-API_PORT = '8000'
+API_PORT = ''
 
 USER_BALLANCE = '''id: {id}
 is_bot: {is_bot}
