@@ -23,3 +23,6 @@ timestamp - {timestamp}
 
 INFO_LOGS = 'logs/info_logfile.log'
 ERROR_LOGS = 'logs/errors_logfile.log'
+
+
+ADMINS = ()

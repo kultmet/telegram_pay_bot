@@ -14,7 +14,6 @@ db_host = os.getenv('DB_HOST', default='localhost')
 db_port = os.getenv('DB_PORT', default='5432')
 PAYMENTS_TOKEN = os.getenv('PAYMENTS_TOKEN')
 TELEGRAM_TOKEN = os.getenv('TELEGRAM_TOKEN')
-ADMINS = (1099010606,)
 
 
 storage = MemoryStorage()

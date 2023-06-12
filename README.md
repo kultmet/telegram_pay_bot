@@ -37,6 +37,7 @@ docker-compose up -d
 git clone https://github.com/kultmet/telegram_pay_bot.git
 ```
 
+Для того чтоб пользоватся командой /admin вам нужно внести свой telegram_id  в константу <code>conctants.ADMINS = (int,)</code>
 
 #### токен 
 
