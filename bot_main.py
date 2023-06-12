@@ -228,22 +228,38 @@ async def change_ballance(call: types.CallbackQuery, state: FSMContext):
 
 @dp.message_handler(state=BallanceInput.balance)
 async def ballance_reciver(message: types.Message, state: FSMContext):
+    try:
+        int(message.text)
+    except ValueError:
+        bot_message = await message.answer(
+            'Проверьте корректность ввода! Можно вводить тоько число!'
+        )
+        message_stack.push(bot_message.message_id)
+        message_stack.push(message.message_id)
+        warning_logger.warning(
+            f'uncorrect input: {message.from_user.id} send "{message.text}"'
+        )
+
+        return
+    await delete_messages(message)
+    message_stack.push(message.message_id)
     info_logger.info(
         f'ballance_reciver: {message.from_user.id} send {message.text}'
     )
     async with state.proxy() as data:
         user_id = data['user_id']
-    await message.answer(message.text)
     try:
         await update_ballance(
             user_id, {'total_ballance': float(message.text) * 100}
         )
         info_logger.info('update_ballance')
     except ValueError:
-        await message.answer("Не корректный тип данных. Введите число")
+        bot_message = await message.answer("Не корректный тип данных. Введите число")
+        message_stack.push(bot_message)
         warning_logger.warning(
             f'uncorrect input: {message.from_user.id} send "{message.text}"'
         )
+        return
     await state.finish()
 
 
@@ -276,6 +292,10 @@ async def get_logs(call: types.CallbackQuery):
     await get_file(ERROR_LOGS, call.message)
     await exit_message(call.message)
 
+
+@dp.message_handler()
+async def any_message(message: types.Message):
+    message_stack.push(message.message_id)
 
 if __name__ == '__main__':
     executor.start_polling(dp, skip_updates=True)

@@ -1,4 +1,4 @@
-from logger import info_logger
+from logger import info_logger, warning_logger
 
 from aiogram import types
 from config import bot
